@@ -14,20 +14,22 @@ app.get('/move', (req, res) => {
     if (!Array.isArray(board) || board.length !== 9) {
         return res.status(400).json({ error: 'El tablero debe ser un array de 9 posiciones.' });
     }
-    // Buscar posiciones vacías (asumiendo que 0 es vacío)
+
     const emptyPositions = board
         .map((v, i) => v === 0 ? i : null)
         .filter(i => i !== null);
-    
+
     if (emptyPositions.length === 0) {
         return res.status(400).json({ error: 'No hay movimientos disponibles.' });
     }
-    
-    // Elegir una posición vacía al azar
+
     const move = emptyPositions[Math.floor(Math.random() * emptyPositions.length)];
+
+    // Devolver el número tal cual
     res.json({ movimiento: move });
 });
 
 app.listen(PORT, () => {
+    console.log("¡Hola soy un bot para jugar tateti, creado por Moyano Sosa Benjamin y Ochoa Tiziana!");
     console.log(`Servidor de tateti escuchando en el puerto ${PORT}`);
 });
